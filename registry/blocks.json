@@ -1,0 +1,47 @@
+{
+  "version": "0.1.0",
+  "blocks": [
+    {
+      "id": "auth",
+      "technology": "Supabase Auth",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    },
+    {
+      "id": "data",
+      "technology": "PostgreSQL / Supabase",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    },
+    {
+      "id": "theme",
+      "technology": "CSS design tokens / shadcn/ui",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    },
+    {
+      "id": "api",
+      "technology": "OpenAPI / REST",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    },
+    {
+      "id": "quality",
+      "technology": "Node test / Playwright / OWASP ASVS",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    },
+    {
+      "id": "release",
+      "technology": "GitHub Actions",
+      "status": "planned",
+      "version": null,
+      "productionVerified": false
+    }
+  ]
+}
