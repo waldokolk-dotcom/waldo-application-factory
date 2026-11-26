@@ -1,0 +1,26 @@
+name: WAF live API verification
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/live-verification.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - name: Verify public Verbindo API contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --silent --show-error --fail --connect-timeout 15 --max-time 90 --retry 1 --retry-max-time 100 --max-filesize 65536 -D headers.txt -o response.json -w 'HTTP %{http_code}; seconds %{time_total}\n' https://open-data-coach.onrender.com/api/waf/status
+          grep -iE '^content-type: application/json([;[:space:]]|$)' headers.txt >/dev/null
+          python3 - <<'PY'
+          import json
+          with open('response.json') as f:
+              data = json.load(f)
+          assert isinstance(data, dict) and data, 'Expected nonempty JSON object'
+          print('Public endpoint returned a JSON object; full contract and authenticated journeys require separate verification.')
+          PY
