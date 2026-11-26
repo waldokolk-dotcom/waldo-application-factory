@@ -1,0 +1,10 @@
+{
+  "apps": [
+    {
+      "id": "verbindo",
+      "repository": "waldokolk-dotcom/open-data-coach",
+      "migration": "planned",
+      "blocks": []
+    }
+  ]
+}
