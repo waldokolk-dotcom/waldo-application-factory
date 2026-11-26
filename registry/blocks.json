@@ -4,9 +4,10 @@
     {
       "id": "auth",
       "technology": "Supabase Auth",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/auth/server.mjs"
     },
     {
       "id": "data",
