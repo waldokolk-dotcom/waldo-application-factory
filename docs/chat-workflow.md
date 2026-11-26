@@ -1,2 +1,5 @@
 # WAF in ChatGPT
 Herken zinvolle applicatiekansen, vraag: Wil je hiervan een applicatie maken? Toon bij instemming of directe nieuwbouwopdracht een interactief WAF-menu met voorgeselecteerde bouwblokken, producttype, identiteit en koppelingen. Lees registry/blocks.json en registry/apps.json vooraf. Toon werkelijke status; geplande blokken zijn niet beschikbaar als werkende software. Beveiliging, testen, kostenbewaking en herstel zijn verplicht. Bij bestaande applicaties geen volledig menu tenzij nodig. WAF nieuw, verbeter, controle, verbind en overzicht zijn afgesproken chatinstructies, geen platformcommando's. Algemene ChatGPT-instructies moeten afzonderlijk ingesteld blijven.
+
+## UX Studio en marketing
+Neem in het WAF-menu ook merk, doelgroep, productdoel, thema, navigatie, beeldstijl, primaire apparaten en marketingdoel op. Toon bij onbesliste stijl 2–3 onderscheidende visuele richtingen. Gebruik docs/ux-marketing-visual-standard.md als verplichte acceptatiestandaard. Vraag niet onnodig naar reeds bekende voorkeuren. Maak onderscheid tussen prototype en werkende implementatie.
