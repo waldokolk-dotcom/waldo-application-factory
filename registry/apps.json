@@ -3,8 +3,18 @@
     {
       "id": "verbindo",
       "repository": "waldokolk-dotcom/open-data-coach",
-      "migration": "planned",
-      "blocks": []
+      "migration": "in-progress",
+      "blocks": [],
+      "role": "primary-reference",
+      "priority": [
+        "auth",
+        "data",
+        "theme",
+        "api",
+        "quality",
+        "release"
+      ],
+      "standard": "docs/ux-marketing-visual-standard.md"
     }
   ]
 }
