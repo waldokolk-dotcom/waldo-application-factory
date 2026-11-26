@@ -4,7 +4,7 @@
       "id": "verbindo",
       "repository": "waldokolk-dotcom/open-data-coach",
       "migration": "in-progress",
-      "blocks": ["auth", "data", "theme", "api", "quality", "release"],
+      "blocks": ["auth", "data", "theme", "api", "quality", "release", "ux-design"],
       "role": "primary-reference",
       "priority": [
         "auth",
@@ -12,7 +12,8 @@
         "theme",
         "api",
         "quality",
-        "release"
+        "release",
+        "ux-design"
       ],
       "standard": "docs/ux-marketing-visual-standard.md"
     }

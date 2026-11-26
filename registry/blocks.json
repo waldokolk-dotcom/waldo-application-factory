@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "blocks": [
     {
       "id": "auth",
@@ -48,6 +48,14 @@
       "version": "0.1.0",
       "productionVerified": false,
       "path": "blocks/release/manifest.mjs"
+    },
+    {
+      "id": "ux-design",
+      "technology": "Evidence-backed pattern library / Playwright",
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/ux-design/patterns.mjs"
     }
   ]
 }
