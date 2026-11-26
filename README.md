@@ -1,5 +1,5 @@
-# Waldo Application Factory 0.1.0
-Centrale ontwikkelstandaard en startpakket, geen productieplatform.
+# Waldo Application Factory 0.2.0
+Centrale ontwikkelstandaard en versiegebonden bouwblokken; Verbindo is de primaire praktijkintegratie. Dit is geen zelfstandig productieplatform.
 
 ## Gebruik
 - Lees AGENTS.md en docs/chat-workflow.md.

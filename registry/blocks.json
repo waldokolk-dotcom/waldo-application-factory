@@ -1,47 +1,53 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "blocks": [
     {
       "id": "auth",
       "technology": "Supabase Auth",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/auth/server.mjs"
     },
     {
       "id": "data",
       "technology": "PostgreSQL / Supabase",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/data/tenant.mjs"
     },
     {
       "id": "theme",
       "technology": "CSS design tokens / shadcn/ui",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/theme.css"
     },
     {
       "id": "api",
       "technology": "OpenAPI / REST",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/api/http.mjs"
     },
     {
       "id": "quality",
       "technology": "Node test / Playwright / OWASP ASVS",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/quality/gate.mjs"
     },
     {
       "id": "release",
       "technology": "GitHub Actions",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/release/manifest.mjs"
     }
   ]
 }
