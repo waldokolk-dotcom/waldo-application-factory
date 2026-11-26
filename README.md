@@ -1,4 +1,4 @@
-# Waldo Application Factory 0.2.0
+# Waldo Application Factory 0.3.0
 Centrale ontwikkelstandaard en versiegebonden bouwblokken; Verbindo is de primaire praktijkintegratie. Dit is geen zelfstandig productieplatform.
 
 ## Gebruik
@@ -13,3 +13,6 @@ Geen gedeelde accounts of persoonsgegevens tussen privé- en werkdomeinen. Geen 
 
 ## UX, marketing en visual design (v0.2 standaard)
 Volg de [verplichte UX-, marketing- en visuele kwaliteitsstandaard](docs/ux-marketing-visual-standard.md). Deze specificatie voegt zes ontwikkelmijlpalen toe; functionele implementatie en tests zijn nog te verifiëren.
+
+## UX design-bouwblok
+`blocks/ux-design` maakt ontwerpbeslissingen herleidbaar naar echte productflows, waaronder Mobbin, en naar openbare design-systemen. Een voorbeeld wordt pas herbruikbaar wanneer de Verbindo-specifieke aanpassing, alle kritieke toestanden en gerenderd testbewijs zijn vastgelegd.

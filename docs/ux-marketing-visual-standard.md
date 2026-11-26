@@ -20,3 +20,6 @@ Use independent UX review of rendered screens and real interactions at mobile an
 5. Automated accessibility and visual regression tests.
 6. UX/marketing/visual gates integrated in each development cycle.
 Use free/open-source tooling where suitable; no paid assets or services without approval. Track these six additional milestones separately from the original thirteen; do not mark a specification as working software.
+
+## Reference-driven design
+Use real product examples during design, not as decorative moodboards. Record the source URL, the observed interaction pattern, the user problem it addresses, the product-specific adaptation and rendered test proof. Mobbin may be used to compare complete search, filter, onboarding and dashboard flows; pair it with public design-system guidance where implementation details or accessibility states are needed. Never copy trade dress, text, assets or brand identity. A reference without an explicit adaptation and tested loading, empty, error, success and permission states does not satisfy the UX gate.
