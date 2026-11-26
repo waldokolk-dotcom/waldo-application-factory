@@ -34,3 +34,18 @@ jobs:
               assert isinstance(block, dict) and block.get('version') == '0.1.0', f'Unexpected block version: {name}'
           print('Versioned status contract and deployment identity verified; authenticated journeys remain separate.')
           PY
+
+      - name: Reject unauthenticated owner and maintenance access
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=https://open-data-coach.onrender.com
+          for route in /api/owner/usage /api/mail/status; do
+            for auth in none malformed; do
+              headers=()
+              if [[ "$auth" == malformed ]]; then headers=(-H 'Authorization: Bearer invalid.test.token'); fi
+              code=$(curl --silent --show-error --connect-timeout 10 --max-time 25 --head -o /dev/null -w '%{http_code}' "${headers[@]}" "$base$route")
+              printf '%s %s: %s\n' "$route" "$auth" "$code"
+              case "$code" in 401|403) ;; *) echo 'Expected authorization denial'; exit 1;; esac
+            done
+          done
