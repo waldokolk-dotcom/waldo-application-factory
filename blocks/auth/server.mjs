@@ -5,7 +5,7 @@ export function createAuthenticator(client) {
   return async function authenticate(header) {
     if (typeof header !== 'string' || header.length > 8192) return null;
     const match = /^Bearer ([A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)$/i.exec(header);
-    if (!match) return null;
+    if (!match || match[0] !== header) return null;
     try {
       const {data,error} = await client.auth.getUser(match[1]);
       if (error || typeof data?.user?.id !== 'string' || !data.user.id.trim()) return null;
