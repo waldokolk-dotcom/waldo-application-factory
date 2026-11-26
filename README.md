@@ -10,3 +10,6 @@ Centrale ontwikkelstandaard en startpakket, geen productieplatform.
 
 ## Grenzen
 Geen gedeelde accounts of persoonsgegevens tussen privé- en werkdomeinen. Geen geheimen in Git. Geen betaalde upgrades. Gratis quota vooraf toetsen. Geen automatische productiedeploy in dit starterpakket.
+
+## UX, marketing en visual design (v0.2 standaard)
+Volg de [verplichte UX-, marketing- en visuele kwaliteitsstandaard](docs/ux-marketing-visual-standard.md). Deze specificatie voegt zes ontwikkelmijlpalen toe; functionele implementatie en tests zijn nog te verifiëren.
