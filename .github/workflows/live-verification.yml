@@ -23,19 +23,20 @@ jobs:
               data = json.load(f)
           assert isinstance(data, dict) and data, 'Expected nonempty JSON object'
           assert data.get('schemaVersion') == 1, 'Unexpected schema version'
-          assert data.get('factoryVersion') == '0.2.0', 'Unexpected factory version'
+          assert data.get('factoryVersion') == '0.3.0', 'Unexpected factory version'
           assert data.get('app') == 'verbindo', 'Unexpected app'
-          assert data.get('appVersion') == '8.2.0', 'Unexpected deployed app version'
-          assert data.get('commit') == '5e4a441dbcecf07b215adcece07402d18fec268e', 'Unexpected deployed commit'
+          assert data.get('appVersion') == '8.3.0', 'Unexpected deployed app version'
+          assert data.get('commit') == 'bce55e39d6b501e33486746f37fdb2503813711f', 'Unexpected deployed commit'
           assert data.get('releaseVerified') is True, 'Missing release metadata'
           blocks = data.get('blocks')
-          assert isinstance(blocks, dict) and set(blocks) == {'auth','data','theme','api','quality','release'}, 'Unexpected block set'
+          assert isinstance(blocks, dict) and set(blocks) == {'auth','data','theme','api','quality','release','ux-design'}, 'Unexpected block set'
           for name, block in blocks.items():
               assert isinstance(block, dict) and block.get('version') == '0.1.0', f'Unexpected block version: {name}'
           print('Versioned status contract and deployment identity verified; authenticated journeys remain separate.')
           PY
 
       - name: Reject unauthenticated owner and maintenance access
+        if: ${{ !cancelled() }}
         shell: bash
         run: |
           set -euo pipefail
