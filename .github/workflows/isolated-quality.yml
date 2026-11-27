@@ -1,0 +1,26 @@
+name: WAF isolated quality
+on:
+  pull_request:
+  push:
+    branches: [main, waf/isolated-quality-runner]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: waf-isolated-quality-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  registry-and-unit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - name: Record acceptance boundary
+        if: always()
+        run: echo 'Unit checks only; no production acceptance or deployment.' >> "$GITHUB_STEP_SUMMARY"
