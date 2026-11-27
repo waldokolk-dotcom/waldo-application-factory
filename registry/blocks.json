@@ -18,10 +18,18 @@
     {
       "id": "data",
       "technology": "PostgreSQL / Supabase",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/data/tenant.mjs"
+      "productionVerified": true,
+      "path": "blocks/data/tenant.mjs",
+      "migration": "blocks/data/migration.mjs",
+      "documentation": "blocks/data/README.md",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "localAcceptanceRun": "https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/45961696873",
+        "liveCommit": "2fae80c79ed1ee0ccc718e441e0b79c0f632ab7c",
+        "verifiedAt": "2026-11-27T16:35:03+01:00"
+      }
     },
     {
       "id": "theme",
