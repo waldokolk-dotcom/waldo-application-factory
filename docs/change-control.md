@@ -1,4 +1,4 @@
-# WAF Change Control v0.1.0
+# WAF Change Control v0.2.0
 
 This block is mandatory for changes to registered applications.
 
@@ -26,3 +26,5 @@ Review at 320, 375, 768, 1280 and 1440 px. Check keyboard focus, Enter, Escape, 
 ## Evidence
 
 The release record links to the preview, screenshots and test output. A deployment without evidence is not considered ready. WOC monitors the published version, stores health results and activates the rollback target when the release is unhealthy.
+
+The executable gate requires HTTPS preview and before/after artifact URLs, an exact target commit, a durable GitHub Actions quality run, passing UX/laptop/accessibility reviews, a verified semantic-version rollback target and a named timestamped approval. Evidence can only be attached to a draft and approval only follows review.

@@ -1,4 +1,4 @@
-# WAF/WOC distribution block v0.1.0
+# WAF/WOC distribution block v0.2.0
 
 WAF publishes versioned building blocks. WOC distributes approved updates to registered applications and records their status. Applications pin a known-good version and never receive an untested major change automatically.
 
@@ -7,6 +7,8 @@ WAF publishes versioned building blocks. WOC distributes approved updates to reg
 `available → approved → staged → active`; failures move to `rolled_back`.
 
 Every update contains appId, blockId, fromVersion, toVersion, changeType, compatibility targets, rollbackVersion, release notes and evidence links.
+
+The executable contract additionally requires a full target commit, a durable GitHub Actions run, a bounded rollout percentage and an approved installed source version. Placeholder evidence, incompatible platforms and rollback targets that differ from the installed version fail closed.
 
 - Patch: security, accessibility or defect fixes; can be auto-staged after checks.
 - Minor: compatible UX or feature changes; staged and approved per application.
