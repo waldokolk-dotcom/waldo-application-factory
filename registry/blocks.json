@@ -133,17 +133,19 @@
       "id": "incident",
       "priority": "P0",
       "technology": "Incident lifecycle",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/incident.mjs"
     },
     {
       "id": "recovery",
       "priority": "P0",
       "technology": "Controlled recovery and rollback",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/recovery.mjs"
     },
     {
       "id": "support",
@@ -173,25 +175,28 @@
       "id": "security-ops",
       "priority": "P0",
       "technology": "Dependency and access monitoring",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/security-ops.mjs"
     },
     {
       "id": "backup",
       "priority": "P0",
       "technology": "Backup and restore verification",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/backup.mjs"
     },
     {
       "id": "cost-control",
       "priority": "P0",
       "technology": "Budget and quota guards",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/cost-control.mjs"
     },
     {
       "id": "knowledge",

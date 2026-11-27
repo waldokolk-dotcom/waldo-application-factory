@@ -1,0 +1,2 @@
+const SHA=/^[a-f0-9]{40}$/;
+export function evaluateSecurityScan({commit,runUrl,scannedAt,critical=0,high=0,accessReview}){if(!SHA.test(commit??'')||!/^https:\/\/github\.com\/.+\/actions\/runs\/[1-9]\d*$/.test(runUrl??'')||Number.isNaN(Date.parse(scannedAt??''))||![critical,high].every(Number.isSafeInteger)||!['pass','fail'].includes(accessReview))throw new TypeError('Invalid security scan');const passed=critical===0&&high===0&&accessReview==='pass';return Object.freeze({commit,runUrl,scannedAt,critical,high,accessReview,passed});}
