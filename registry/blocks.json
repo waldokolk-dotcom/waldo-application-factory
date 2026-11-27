@@ -151,25 +151,28 @@
       "id": "support",
       "priority": "P1",
       "technology": "Support tickets and approved replies",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/support.mjs"
     },
     {
       "id": "feedback",
       "priority": "P1",
       "technology": "Feedback triage",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/feedback.mjs"
     },
     {
       "id": "improvement",
       "priority": "P2",
       "technology": "Evidence-based improvement",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/improvement.mjs"
     },
     {
       "id": "security-ops",
@@ -202,25 +205,28 @@
       "id": "knowledge",
       "priority": "P2",
       "technology": "Operational knowledge base",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/knowledge.mjs"
     },
     {
       "id": "notifications",
       "priority": "P1",
       "technology": "Consent-aware notifications",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/notifications.mjs"
     },
     {
       "id": "ops-reporting",
       "priority": "P1",
       "technology": "Operational evidence reporting",
-      "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/operations/ops-reporting.mjs"
     },
     {
       "id": "distribution",
