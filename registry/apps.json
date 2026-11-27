@@ -5,7 +5,8 @@
       "repository": "waldokolk-dotcom/open-data-coach",
       "migration": "in-progress",
       "blocks": [
-        "auth"
+        "auth",
+        "data"
       ],
       "role": "primary-reference",
       "priority": [
