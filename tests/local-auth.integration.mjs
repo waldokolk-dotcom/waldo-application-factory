@@ -6,8 +6,9 @@ import { randomUUID } from 'node:crypto';
 const API = 'http://127.0.0.1:54321';
 const MAIL = 'http://127.0.0.1:54324';
 const key = process.env.WAF_LOCAL_SUPABASE_KEY;
-if (process.env.WAF_LOCAL_AUTH !== '1' || !key || /^https?:/.test(key)) {
-  throw new Error('Local-only acceptance environment and publishable key required');
+const secret = process.env.WAF_LOCAL_SUPABASE_SECRET;
+if (process.env.WAF_LOCAL_AUTH !== '1' || !key || !secret || /^https?:/.test(key) || /^https?:/.test(secret)) {
+  throw new Error('Local-only acceptance environment plus publishable and server-only keys required');
 }
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 async function auth(path, method = 'GET', body, token) {
@@ -25,6 +26,9 @@ async function auth(path, method = 'GET', body, token) {
   let json;
   try { json = JSON.parse(result); } catch { json = null; }
   return {status: response.status, json};
+}
+async function admin(path, method = 'GET', body) {
+  return auth('admin/' + path, method, body, secret);
 }
 async function mailFor(address, exclude = new Set()) {
   for (let attempt = 0; attempt < 30; attempt++) {
@@ -57,8 +61,8 @@ async function signIn(email, password) {
   assert.ok(r.json?.access_token && r.json?.refresh_token && r.json?.user?.id);
   return r.json;
 }
-async function data(method, token, body, query = '') {
-  const response = await fetch(API + '/rest/v1/waf_test_records' + query, {
+async function data(method, token, body, query = '', table = 'waf_test_records') {
+  const response = await fetch(API + '/rest/v1/' + table + query, {
     method,
     headers: {
       apikey: key,
@@ -73,6 +77,24 @@ async function data(method, token, body, query = '') {
   let json;
   try {json=JSON.parse(result);} catch {json=null;}
   return {status:response.status,json};
+}
+async function exerciseProfiles(userA,userB) {
+  const table='waf_test_profiles';
+  const insertA=await data('POST',userA.access_token,{user_id:userA.user.id,display_name:'Account A'},'',table);
+  assert.equal(insertA.status,201,'User A profile creation must succeed');
+  const insertB=await data('POST',userB.access_token,{user_id:userB.user.id,display_name:'Account B'},'',table);
+  assert.equal(insertB.status,201,'User B profile creation must succeed');
+  const spoof=await data('POST',userA.access_token,{user_id:userB.user.id,display_name:'Spoof'},'',table);
+  assert.ok([401,403].includes(spoof.status),'Profile ownership spoofing must be rejected');
+  const readA=await data('GET',userA.access_token,undefined,'?select=user_id,display_name',table);
+  assert.deepEqual(readA.json,[{user_id:userA.user.id,display_name:'Account A'}]);
+  const crossUpdate=await data('PATCH',userA.access_token,{display_name:'Tampered'},'?user_id=eq.'+userB.user.id,table);
+  assert.ok([200,204].includes(crossUpdate.status),'Cross-profile update must be safely filtered');
+  const updateOwn=await data('PATCH',userA.access_token,{display_name:'Account A updated'},'?user_id=eq.'+userA.user.id,table);
+  assert.equal(updateOwn.status,200);
+  assert.equal(updateOwn.json?.[0]?.display_name,'Account A updated');
+  const readB=await data('GET',userB.access_token,undefined,'?select=display_name',table);
+  assert.deepEqual(readB.json,[{display_name:'Account B'}],'Other profile must remain unchanged');
 }
 async function exerciseRls(userA,userB) {
   const inserted=[];
@@ -134,6 +156,11 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
   assert.ok([401,403].includes((await auth('user', 'GET', undefined, 'invalid')).status), 'Invalid token must be denied');
   assert.ok([401,403].includes((await auth('admin/users','GET',undefined,userA.access_token)).status),
     'Normal users must not access the admin API');
+  const users=await admin('users');
+  assert.equal(users.status,200,'Server-only key must access local user management');
+  assert.ok(users.json?.users?.some(user=>user.id===userA.user.id));
+  assert.ok(users.json?.users?.some(user=>user.id===userB.user.id));
+  await exerciseProfiles(userA,userB);
   await exerciseRls(userA,userB);
   const recovery = await auth('recover','POST',{email:a});
   assert.ok([200,204].includes(recovery.status),'Recovery request failed');
@@ -165,5 +192,11 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
   assert.equal((await auth('user','GET',undefined,userB.access_token)).status,200,'Other account remains unaffected');
   const signOut = await auth('logout','POST',{},userB.access_token);
   assert.ok([200,204].includes(signOut.status),'Logout failed');
+  const removedB=await admin('users/'+encodeURIComponent(userB.user.id),'DELETE');
+  assert.equal(removedB.status,200,'Authorized local user deletion must succeed');
+  const deletedLogin=await auth('token?grant_type=password','POST',{email:b,password});
+  assert.ok([400,401,403].includes(deletedLogin.status),'Deleted user must not sign in');
+  const removedA=await admin('users/'+encodeURIComponent(userA.user.id),'DELETE');
+  assert.equal(removedA.status,200,'Authorized local cleanup must succeed');
   // Local Supabase stack is destroyed with supabase stop --no-backup in workflow finally.
 });
