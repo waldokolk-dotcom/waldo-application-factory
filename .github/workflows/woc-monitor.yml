@@ -1,0 +1,24 @@
+name: WOC live monitoring
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'operations/probe.mjs'
+      - '.github/workflows/woc-monitor.yml'
+permissions:
+  contents: read
+concurrency:
+  group: woc-live-monitor
+  cancel-in-progress: false
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node operations/probe.mjs
