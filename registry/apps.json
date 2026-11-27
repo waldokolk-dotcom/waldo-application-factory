@@ -6,7 +6,13 @@
       "migration": "in-progress",
       "blocks": [
         "auth",
-        "data"
+        "data",
+        "theme",
+        "api",
+        "ux-design",
+        "quality",
+        "release",
+        "monitoring"
       ],
       "role": "primary-reference",
       "priority": [

@@ -8,7 +8,7 @@ const valid = {
   referenceIds: ['mobbin-search', 'atlassian-empty'],
   adaptation: 'Use Dutch public-sector questions and preserve Verbindo branding and evidence labels.',
   states: REQUIRED_STATES,
-  proof: 'tests/browser-smoke.mjs'
+  proof: {commit:'a'.repeat(40),runUrl:'https://github.com/waldo/verbindo/actions/runs/1',verifiedAt:'2026-11-27T00:00:00Z'}
 };
 
 test('creates a traceable product-specific UX decision', () => {
@@ -20,5 +20,5 @@ test('creates a traceable product-specific UX decision', () => {
 test('rejects unknown references and incomplete states', () => {
   assert.throws(() => createUxDecision({ ...valid, referenceIds: ['unknown'] }));
   assert.throws(() => createUxDecision({ ...valid, states: ['success'] }));
-  assert.throws(() => createUxDecision({ ...valid, proof: '' }));
+  assert.throws(() => createUxDecision({ ...valid, proof: {} }));
 });
