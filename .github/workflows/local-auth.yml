@@ -6,6 +6,7 @@ on:
       - '.github/workflows/local-auth.yml'
       - 'supabase/config.toml'
       - 'tests/local-auth.integration.mjs'
+      - 'tests/fixtures/local-rls.sql'
   workflow_dispatch:
 
 permissions:
@@ -37,6 +38,12 @@ jobs:
         env:
           SUPABASE_TELEMETRY_DISABLED: '1'
         run: npx --yes supabase@3.4.0 start --exclude studio,realtime,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor
+      - name: Install test-only owner RLS fixture in local Postgres
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        run: |
+          npx --yes supabase@3.4.0 db query --help >/dev/null
+          npx --yes supabase@3.4.0 db query --file tests/fixtures/local-rls.sql
       - name: Export temporary local publishable key
         env:
           SUPABASE_TELEMETRY_DISABLED: '1'
