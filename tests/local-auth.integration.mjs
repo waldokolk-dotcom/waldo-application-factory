@@ -138,7 +138,31 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
   const recovery = await auth('recover','POST',{email:a});
   assert.ok([200,204].includes(recovery.status),'Recovery request failed');
   const recoveryMail = await mailFor(a,seen);
-  await followEmailLink(recoveryMail.message,'recovery');
+  const redirect = await followEmailLink(recoveryMail.message,'recovery');
+  const callback = new URL(redirect,API);
+  const fragment = new URLSearchParams(callback.hash.slice(1));
+  assert.equal(fragment.get('type'),'recovery','Expected recovery callback');
+  const recoveryToken = fragment.get('access_token');
+  assert.ok(recoveryToken,'Recovery access token required');
+  const recovered = await auth('user','GET',undefined,recoveryToken);
+  assert.equal(recovered.status,200);
+  assert.equal(recovered.json?.id,userA.user.id);
+  const newPassword = 'Reset-Only-' + randomUUID() + '!aA9';
+  const changed = await auth('user','PUT',{password:newPassword},recoveryToken);
+  assert.equal(changed.status,200,'Password change failed');
+  const old = await auth('token?grant_type=password','POST',{email:a,password});
+  assert.ok([400,401,403].includes(old.status),'Old password must fail');
+  const fresh = await signIn(a,newPassword);
+  assert.equal(fresh.user.id,userA.user.id);
+  const refreshed = await auth('token?grant_type=refresh_token','POST',{refresh_token:fresh.refresh_token});
+  assert.equal(refreshed.status,200,'Refresh must succeed');
+  assert.ok(refreshed.json?.access_token && refreshed.json?.refresh_token);
+  const logoutA = await auth('logout?scope=global','POST',{},refreshed.json.access_token);
+  assert.ok([200,204].includes(logoutA.status));
+  const revoked = await auth('token?grant_type=refresh_token','POST',{refresh_token:refreshed.json.refresh_token});
+  assert.ok([400,401,403].includes(revoked.status),'Revoked refresh token must fail');
+  // Existing access JWTs may remain valid until expiry; do not claim immediate JWT revocation.
+  assert.equal((await auth('user','GET',undefined,userB.access_token)).status,200,'Other account remains unaffected');
   const signOut = await auth('logout','POST',{},userB.access_token);
   assert.ok([200,204].includes(signOut.status),'Logout failed');
   // Local Supabase stack is destroyed with supabase stop --no-backup in workflow finally.
