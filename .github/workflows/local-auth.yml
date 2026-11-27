@@ -54,7 +54,7 @@ jobs:
             if (result.status !== 0) throw Error('Local RLS fixture setup failed');
           }
           NODE
-      - name: Export temporary local publishable key
+      - name: Export temporary local publishable and server-only keys
         env:
           SUPABASE_TELEMETRY_DISABLED: '1'
         shell: bash
@@ -67,10 +67,15 @@ jobs:
           const keys=Object.entries(status);
           const key=status.PUBLISHABLE_KEY || status.ANON_KEY || status.publishable_key ||
             keys.find(([name,value])=>/PUBLISHABLE|ANON/i.test(name)&&typeof value==='string')?.[1];
+          // GoTrue's admin endpoint requires the service_role JWT. The newer
+          // sb_secret key is valid at the gateway but is not an admin JWT.
+          const secret=status.SERVICE_ROLE_KEY || status.service_role_key ||
+            keys.find(([name,value])=>/SERVICE_ROLE/i.test(name)&&typeof value==='string')?.[1];
           if (!key || typeof key!=='string') throw Error('Missing local publishable key; available field names: '+keys.map(([name])=>name).join(','));
-          fs.appendFileSync(process.env.GITHUB_ENV,'WAF_LOCAL_AUTH=1\nWAF_LOCAL_SUPABASE_KEY='+key+'\n');
+          if (!secret || typeof secret!=='string') throw Error('Missing local service-role JWT; available field names: '+keys.map(([name])=>name).join(','));
+          fs.appendFileSync(process.env.GITHUB_ENV,'WAF_LOCAL_AUTH=1\nWAF_LOCAL_SUPABASE_KEY='+key+'\nWAF_LOCAL_SUPABASE_SECRET='+secret+'\n');
           NODE
-      - name: Run real signup confirmation recovery and negative authorization checks
+      - name: Run real account lifecycle profile RLS and user-management checks
         run: node --test tests/local-auth.integration.mjs
       - name: Destroy local fixture containers and test users
         if: always()
