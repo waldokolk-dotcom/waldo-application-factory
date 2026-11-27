@@ -6,6 +6,7 @@ on:
       - '.github/workflows/local-auth.yml'
       - 'supabase/config.toml'
       - 'tests/local-auth.integration.mjs'
+      - 'tests/fixtures/local-rls.sql'
   workflow_dispatch:
 
 permissions:
@@ -37,6 +38,22 @@ jobs:
         env:
           SUPABASE_TELEMETRY_DISABLED: '1'
         run: npx --yes supabase@3.4.0 start --exclude studio,realtime,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor
+      - name: Install test-only owner RLS fixture in local Postgres
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        run: |
+          npx --yes supabase@3.4.0 db query --help >/dev/null
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          import {spawnSync} from 'node:child_process';
+          const statements=fs.readFileSync('tests/fixtures/local-rls.sql','utf8')
+            .replace(/^--.*$/gm,'').split(';').map(x=>x.trim()).filter(Boolean);
+          if (statements.length < 5) throw Error('RLS fixture incomplete');
+          for (const sql of statements) {
+            const result=spawnSync('npx',['--yes','supabase@3.4.0','db','query',sql],{stdio:'inherit'});
+            if (result.status !== 0) throw Error('Local RLS fixture setup failed');
+          }
+          NODE
       - name: Export temporary local publishable key
         env:
           SUPABASE_TELEMETRY_DISABLED: '1'
