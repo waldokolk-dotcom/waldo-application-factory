@@ -12,8 +12,13 @@ test('quality gate fails closed on missing, failed or unproved evidence', () => 
   assert.throws(()=>createEvidence({id:'visual',status:'pass',runUrl:'http://example.test/1',commit,recordedAt:'now'}));
 });
 test('release manifest requires semver, full commit and complete evidence', () => {
-  const manifest = createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit, evidence, createdAt: '2026-11-26T00:00:00.000Z' });
+  const deployment={provider:'render',liveCommit:commit,healthUrl:'https://app.example.test/api/health',verifiedAt:'2026-11-26T01:00:00.000Z'};
+  const rollback={commit:'b'.repeat(40),procedure:'Revert merge and deploy the recorded compatible commit.',verifiedAt:'2026-11-26T01:01:00.000Z'};
+  const manifest = createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit, evidence, deployment, rollback, createdAt: '2026-11-26T00:00:00.000Z' });
   assert.equal(manifest.app, 'verbindo');
-  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2', commit: 'a'.repeat(40), evidence }));
-  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit: 'a'.repeat(40), evidence: [] }));
+  assert.equal(manifest.schemaVersion,2);
+  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2', commit, evidence, deployment, rollback }));
+  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit, evidence: [], deployment, rollback }));
+  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit, evidence, deployment:{...deployment,liveCommit:'c'.repeat(40)}, rollback }));
+  assert.throws(() => createReleaseManifest({ app: 'verbindo', version: '8.2.0', commit, evidence, deployment, rollback:{...rollback,commit} }));
 });
