@@ -138,7 +138,26 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
   const recovery = await auth('recover','POST',{email:a});
   assert.ok([200,204].includes(recovery.status),'Recovery request failed');
   const recoveryMail = await mailFor(a,seen);
-  await followEmailLink(recoveryMail.message,'recovery');
+  const redirect = await followEmailLink(recoveryMail.message,'recovery');
+  const fragment = new URLSearchParams(new URL(redirect,API).hash.slice(1));
+  assert.equal(fragment.get('type'),'recovery');
+  const recoveryToken = fragment.get('access_token');
+  assert.ok(recoveryToken,'Recovery session required');
+  const newPassword = 'Reset-Only-' + randomUUID() + '!aA9';
+  const changed = await auth('user','PUT',{password:newPassword},recoveryToken);
+  assert.equal(changed.status,200,'Password update must succeed');
+  const oldLogin = await auth('token?grant_type=password','POST',{email:a,password});
+  assert.ok([400,401,403].includes(oldLogin.status),'Old password must be denied');
+  const fresh = await signIn(a,newPassword);
+  assert.equal(fresh.user.id,userA.user.id);
+  const refreshed = await auth('token?grant_type=refresh_token','POST',{refresh_token:fresh.refresh_token});
+  assert.equal(refreshed.status,200);
+  assert.ok(refreshed.json?.refresh_token && refreshed.json?.access_token);
+  const logoutA = await auth('logout','POST',{},refreshed.json.access_token);
+  assert.ok([200,204].includes(logoutA.status));
+  const revoked = await auth('token?grant_type=refresh_token','POST',{refresh_token:refreshed.json.refresh_token});
+  assert.ok([400,401,403].includes(revoked.status),'Logged-out refresh token must be denied');
+  assert.equal((await auth('user','GET',undefined,userB.access_token)).status,200,'Other user must remain signed in');
   const signOut = await auth('logout','POST',{},userB.access_token);
   assert.ok([200,204].includes(signOut.status),'Logout failed');
   // Local Supabase stack is destroyed with supabase stop --no-backup in workflow finally.
