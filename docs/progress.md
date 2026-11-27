@@ -86,3 +86,7 @@ PR6 merged eb7122525e562b3479eb0b6bc437b24297755d91 after exact head a000080fa56
 - **Fase 1 status ongewijzigd:** Auth/Data/Theme/API/Quality/Release blijven `testing` versie 0.1.0, **0/6 productiegeverifieerd**, want testfixture != live Verbindo-productieacceptatie. De overige 13 mijlpalen uit 19 blijven in bestaande backlog. Productie, Pootgenoten en fase 2 niet gewijzigd.
 - **Resterende acceptatie:** daadwerkelijk resetten van wachtwoord, profiel/admin-eindpunten, echte Verbindo-positieve en negatieve productietests, browserjourneys, WCAG/visuele regressie, gecontroleerde Render-release/rollback en alle zes register-contracten. Geen nieuwe betaalde diensten, geen wijziging in zichtbaarheid; account-specifieke GitHub Actions-kosten/quota niet leesbaar.
 - **Eerstvolgende concrete actie:** test password recovery -> nieuwe credentials en token-/refresh-afmelding, daarna browser-UX en hostedspecifieke positieve/negatieve acceptatie, zonder testmail naar echte mailboxen.
+
+
+## Auth consolidation — 27 November 2026
+PR17 recovery assertions carried onto current main c37725da7dd1a94364ccb1d4ed7a078df10e2412; PR20 overlaps. Existing RLS fixture preserved. Integration CI pending; no production acceptance or consumer writes. Branch update uses expected-head lease; shared automation lock not established. Rollback: discard branch or revert eventual merge. 0/6 production verified.
