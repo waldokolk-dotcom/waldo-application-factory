@@ -1,0 +1,63 @@
+name: WAF local Supabase Mailpit acceptance
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/local-auth.yml'
+      - 'supabase/config.toml'
+      - 'tests/local-auth.integration.mjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: waf-local-auth-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  local-auth:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Inspect pinned Supabase CLI commands
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        run: |
+          npx --yes supabase@3.4.0 --version
+          npx --yes supabase@3.4.0 start --help >/dev/null
+          npx --yes supabase@3.4.0 status --help >/dev/null
+      - name: Start local-only Supabase and built-in Mailpit
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        run: npx --yes supabase@3.4.0 start --exclude studio,realtime,storage-api,imgproxy,edge-runtime,logflare,vector,supavisor
+      - name: Export temporary local publishable key
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx --yes supabase@3.4.0 status -o json > "$RUNNER_TEMP/waf-local-status.json"
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const status=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/waf-local-status.json','utf8'));
+          const keys=Object.entries(status);
+          const key=status.PUBLISHABLE_KEY || status.ANON_KEY || status.publishable_key ||
+            keys.find(([name,value])=>/PUBLISHABLE|ANON/i.test(name)&&typeof value==='string')?.[1];
+          if (!key || typeof key!=='string') throw Error('Missing local publishable key; available field names: '+keys.map(([name])=>name).join(','));
+          fs.appendFileSync(process.env.GITHUB_ENV,'WAF_LOCAL_AUTH=1\nWAF_LOCAL_SUPABASE_KEY='+key+'\n');
+          NODE
+      - name: Run real signup confirmation recovery and negative authorization checks
+        run: node --test tests/local-auth.integration.mjs
+      - name: Destroy local fixture containers and test users
+        if: always()
+        timeout-minutes: 2
+        env:
+          SUPABASE_TELEMETRY_DISABLED: '1'
+        run: npx --yes supabase@3.4.0 stop --no-backup || true
