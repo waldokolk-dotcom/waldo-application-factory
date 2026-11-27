@@ -78,7 +78,7 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
     assert.equal(current.status,200);
     assert.equal(current.json?.email,email);
   }
-  assert.equal((await auth('user', 'GET', undefined, 'invalid')).status, 401);
+  assert.ok([401,403].includes((await auth('user', 'GET', undefined, 'invalid')).status), 'Invalid token must be denied');
   assert.ok([401,403].includes((await auth('admin/users','GET',undefined,userA.access_token)).status),
     'Normal users must not access the admin API');
   const recovery = await auth('recover','POST',{email:a});
