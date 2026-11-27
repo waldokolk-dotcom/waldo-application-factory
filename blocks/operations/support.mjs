@@ -1,0 +1,4 @@
+const UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+const PII=/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b|\b(?:\+?31|0)6[- ]?\d{8}\b/i;
+export function createTicket({id,ownerId,category,message,createdAt}){if(!/^sup-[a-z0-9-]{3,40}$/.test(id??'')||!UUID.test(ownerId??'')||!['account','data','accessibility','incident','other'].includes(category)||typeof message!=='string'||message.trim().length<10||message.length>2000||PII.test(message)||Number.isNaN(Date.parse(createdAt??'')))throw new TypeError('Invalid or sensitive support ticket');return Object.freeze({id,ownerId,category,message:message.trim(),createdAt,state:'open'});}
+export function ticketForOwner(ticket,ownerId){if(!UUID.test(ownerId??'')||ticket.ownerId!==ownerId)throw new Error('Forbidden');return ticket;}
