@@ -1,5 +1,5 @@
 {
-  "version": "0.3.1",
+  "version": "0.3.2",
   "blocks": [
     {
       "id": "auth",
@@ -153,6 +153,16 @@
       "productionVerified": false,
       "path": "blocks/distribution/manifest.mjs",
       "documentation": "docs/distribution.md"
+    },
+    {
+      "id": "change-control",
+      "priority": "P0",
+      "technology": "Preview, evidence, approval and rollback gate",
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/change-control/manifest.mjs",
+      "documentation": "docs/change-control.md"
     }
   ]
 }
