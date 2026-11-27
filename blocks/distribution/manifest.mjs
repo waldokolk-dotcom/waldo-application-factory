@@ -18,5 +18,5 @@ export function canRollout(update, app) {
 
 export function createReleaseNotice(update) {
   const safe = validateUpdate(update);
-  return { type:'waf-update', appId:safe.appId, blockId:safe.blockId, from:safe.fromVersion, to:safe.toVersion, state:safe.state, rollbackVersion:safe.rollbackVersion };
+  return { type:'waf-update', appId:safe.appId, blockId:safe.blockId, fromVersion:safe.fromVersion, toVersion:safe.toVersion, from:safe.fromVersion, to:safe.toVersion, state:safe.state, rollbackVersion:safe.rollbackVersion };
 }
