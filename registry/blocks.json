@@ -50,10 +50,19 @@
     {
       "id": "api",
       "technology": "OpenAPI / REST",
-      "status": "testing",
-      "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/api/http.mjs"
+      "status": "approved",
+      "version": "0.2.0",
+      "productionVerified": true,
+      "path": "blocks/api/http.mjs",
+      "connector": "blocks/api/connector.mjs",
+      "openapi": "blocks/api/openapi.mjs",
+      "documentation": "blocks/api/README.md",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "liveContractRun": "https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/45925266485",
+        "liveCommit": "2fae80c79ed1ee0ccc718e441e0b79c0f632ab7c",
+        "verifiedAt": "2026-11-27T17:16:00+01:00"
+      }
     },
     {
       "id": "quality",
