@@ -34,10 +34,18 @@
     {
       "id": "theme",
       "technology": "CSS design tokens / shadcn/ui",
-      "status": "testing",
-      "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/theme.css"
+      "status": "approved",
+      "version": "0.2.0",
+      "productionVerified": true,
+      "path": "blocks/theme.css",
+      "identityPackage": "blocks/theme/identity.mjs",
+      "documentation": "blocks/theme/README.md",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "localVisualContract": "tests/theme.test.mjs + Verbindo tests/smoke-ui.mjs (36/36)",
+        "liveCommit": "2fae80c79ed1ee0ccc718e441e0b79c0f632ab7c",
+        "verifiedAt": "2026-11-27T17:05:00+01:00"
+      }
     },
     {
       "id": "api",
