@@ -133,120 +133,133 @@
       "id": "incident",
       "priority": "P0",
       "technology": "Incident lifecycle",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/incident.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/incident.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "recovery",
       "priority": "P0",
       "technology": "Controlled recovery and rollback",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/recovery.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/recovery.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "support",
       "priority": "P1",
       "technology": "Support tickets and approved replies",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/support.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/support.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "feedback",
       "priority": "P1",
       "technology": "Feedback triage",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/feedback.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/feedback.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "improvement",
       "priority": "P2",
       "technology": "Evidence-based improvement",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/improvement.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/improvement.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "security-ops",
       "priority": "P0",
       "technology": "Dependency and access monitoring",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/security-ops.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/security-ops.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "backup",
       "priority": "P0",
       "technology": "Backup and restore verification",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/backup.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/backup.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "cost-control",
       "priority": "P0",
       "technology": "Budget and quota guards",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/cost-control.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/cost-control.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "knowledge",
       "priority": "P2",
       "technology": "Operational knowledge base",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/knowledge.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/knowledge.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "notifications",
       "priority": "P1",
       "technology": "Consent-aware notifications",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/notifications.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/notifications.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "ops-reporting",
       "priority": "P1",
       "technology": "Operational evidence reporting",
-      "status": "testing",
+      "status": "approved",
       "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/ops-reporting.mjs"
+      "productionVerified": true,
+      "path": "blocks/operations/ops-reporting.mjs",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "distribution",
       "priority": "P0",
       "technology": "Versioned WAF/WOC distribution, compatibility, rollout and rollback",
-      "status": "testing",
+      "status": "approved",
       "version": "0.2.0",
-      "productionVerified": false,
+      "productionVerified": true,
       "path": "blocks/distribution/manifest.mjs",
-      "documentation": "docs/distribution.md"
+      "documentation": "docs/distribution.md",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     },
     {
       "id": "change-control",
       "priority": "P0",
       "technology": "Preview, evidence, approval and rollback gate",
-      "status": "testing",
+      "status": "approved",
       "version": "0.2.0",
-      "productionVerified": false,
+      "productionVerified": true,
       "path": "blocks/change-control/manifest.mjs",
-      "documentation": "docs/change-control.md"
+      "documentation": "docs/change-control.md",
+      "evidence": {"referenceApp":"waf-reference","acceptanceUrl":"https://waf-operations-reference.onrender.com/acceptance","evidenceRun":"https://github.com/waldokolk-dotcom/waldo-application-factory/actions/runs/46036017112","deployId":"dep-dc4r6nk9v7es7383dj00","liveCommit":"937e80a1a13d8014e827190d294eae143979ae6a","verifiedAt":"2026-11-27T17:45:08+01:00"}
     }
   ]
 }

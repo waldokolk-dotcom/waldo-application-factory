@@ -1,6 +1,17 @@
 {
   "apps": [
     {
+      "id": "waf-reference",
+      "repository": "waldokolk-dotcom/waldo-application-factory",
+      "migration": "isolated-reference",
+      "blocks": ["incident", "recovery", "support", "feedback", "improvement", "security-ops", "backup", "cost-control", "knowledge", "notifications", "ops-reporting", "distribution", "change-control"],
+      "liveUrl": "https://waf-operations-reference.onrender.com",
+      "liveCommit": "937e80a1a13d8014e827190d294eae143979ae6a",
+      "role": "isolated-operations-reference",
+      "priority": ["incident", "recovery", "support", "feedback", "improvement", "security-ops", "backup", "cost-control", "knowledge", "notifications", "ops-reporting", "distribution", "change-control"],
+      "standard": "docs/ux-marketing-visual-standard.md"
+    },
+    {
       "id": "verbindo",
       "repository": "waldokolk-dotcom/open-data-coach",
       "migration": "in-progress",
