@@ -1,20 +1,57 @@
-/* WAF theme contract v0.1.0. Product themes override tokens, not interaction semantics. */
+/* WAF theme contract v0.2.0. Products override identity tokens, never interaction semantics. */
 :root {
   color-scheme: light;
   --brand-primary: #244d6b;
-  --brand-primary-contrast: #fff;
-  --brand-surface: #fff;
+  --brand-primary-contrast: #ffffff;
+  --brand-secondary: #526474;
+  --brand-accent: #0b6bcb;
+  --brand-surface: #ffffff;
   --brand-surface-subtle: #f3f6f8;
   --brand-text: #172536;
   --brand-muted: #526474;
   --brand-border: #b8c5cf;
   --brand-danger: #a51d2d;
   --brand-success: #17633a;
+  --brand-warning: #7a4d00;
   --brand-radius: .5rem;
-  --brand-font: system-ui, sans-serif;
-  --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-6: 1.5rem; --space-8: 2rem;
-  --focus-ring: 3px solid #0b6bcb;
+  --brand-font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --focus-ring-color: #0b6bcb;
+  --focus-ring: 3px solid var(--focus-ring-color);
+  --background: var(--brand-surface);
+  --foreground: var(--brand-text);
+  --card: var(--brand-surface);
+  --card-foreground: var(--brand-text);
+  --popover: var(--brand-surface);
+  --popover-foreground: var(--brand-text);
+  --primary: var(--brand-primary);
+  --primary-foreground: var(--brand-primary-contrast);
+  --secondary: var(--brand-surface-subtle);
+  --secondary-foreground: var(--brand-text);
+  --muted: var(--brand-surface-subtle);
+  --muted-foreground: var(--brand-muted);
+  --accent: var(--brand-surface-subtle);
+  --accent-foreground: var(--brand-text);
+  --destructive: var(--brand-danger);
+  --destructive-foreground: #ffffff;
+  --border: var(--brand-border);
+  --input: var(--brand-border);
+  --ring: var(--focus-ring-color);
+  --radius: var(--brand-radius);
 }
-body { font-family: var(--brand-font); background: var(--brand-surface); color: var(--brand-text); }
-:focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
-@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; } }
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: light; text-size-adjust: 100%; }
+body { margin: 0; min-width: 20rem; overflow-wrap: anywhere; font-family: var(--brand-font); background: var(--brand-surface); color: var(--brand-text); }
+button, input, select, textarea { font: inherit; }
+img, video, canvas, svg { max-width: 100%; height: auto; }
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline: var(--focus-ring); outline-offset: 3px; }
+@media (forced-colors: active) { :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible { outline-color: Highlight; } }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
