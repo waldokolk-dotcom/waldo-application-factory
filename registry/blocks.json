@@ -85,10 +85,19 @@
     {
       "id": "release",
       "technology": "GitHub Actions",
-      "status": "testing",
-      "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/release/manifest.mjs"
+      "status": "approved",
+      "version": "0.2.0",
+      "productionVerified": true,
+      "path": "blocks/release/manifest.mjs",
+      "documentation": "blocks/release/README.md",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "releaseRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46031455833",
+        "browserRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46031455775",
+        "liveCommit": "3fc2676fa560d71e817dfc3e2072d0391cfa573f",
+        "rollbackCommit": "8e7d85e6c04016447d584a011caa5613f01969e7",
+        "verifiedAt": "2026-11-27T18:31:00+01:00"
+      }
     },
     {
       "id": "ux-design",
