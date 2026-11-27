@@ -1,6 +1,19 @@
 {
   "apps": [
     {
+      "id": "mission-control",
+      "name": "Mission Control WAF en WOC",
+      "repository": "waldokolk-dotcom/waldo-operations-center",
+      "migration": "m00-m01-in-progress",
+      "blocks": ["auth", "data", "theme", "api", "ux-design", "quality", "release", "distribution", "change-control", "monitoring", "incident", "recovery", "security-ops", "backup", "cost-control", "support", "feedback", "improvement", "knowledge", "notifications", "ops-reporting"],
+      "role": "central-operations-product",
+      "standard": "docs/ux-marketing-visual-standard.md",
+      "specification": "waldo-operations-center/docs/specifications/mission-control-1.0.md",
+      "activeVersion": null,
+      "rolloutPolicy": "staged",
+      "productionVerified": false
+    },
+    {
       "id": "waf-reference",
       "repository": "waldokolk-dotcom/waldo-application-factory",
       "migration": "isolated-reference",
