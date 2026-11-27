@@ -102,20 +102,32 @@
     {
       "id": "ux-design",
       "technology": "Evidence-backed pattern library / icon buttons / responsive UX",
-      "status": "testing",
-      "version": "0.1.1",
-      "productionVerified": false,
+      "status": "approved",
+      "version": "0.2.0",
+      "productionVerified": true,
       "path": "blocks/ux-design/icon-buttons.css",
-      "documentation": "docs/ux-icon-buttons.md"
+      "documentation": "docs/ux-icon-buttons.md",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "browserRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46031455775",
+        "liveCommit": "3fc2676fa560d71e817dfc3e2072d0391cfa573f",
+        "verifiedAt": "2026-11-27T18:38:00+01:00"
+      }
     },
     {
       "id": "monitoring",
       "priority": "P0",
       "technology": "Bounded HTTP health checks",
-      "status": "testing",
-      "version": "0.1.0",
-      "productionVerified": false,
-      "path": "blocks/operations/monitoring.mjs"
+      "status": "approved",
+      "version": "0.2.0",
+      "productionVerified": true,
+      "path": "blocks/operations/monitoring.mjs",
+      "evidence": {
+        "referenceApp": "verbindo",
+        "healthUrl": "https://open-data-coach.onrender.com/api/health",
+        "liveCommit": "3fc2676fa560d71e817dfc3e2072d0391cfa573f",
+        "verifiedAt": "2026-11-27T18:38:00+01:00"
+      }
     },
     {
       "id": "incident",

@@ -1,4 +1,4 @@
-// v0.1.0 — evidence-backed UX pattern decisions, without copying product identity.
+// v0.2.0 — evidence-backed UX pattern decisions, without copying product identity.
 export const UX_REFERENCES = Object.freeze({
   'mobbin-search': Object.freeze({
     source: 'Mobbin',
@@ -25,8 +25,8 @@ export function createUxDecision({ id, journey, referenceIds, adaptation, states
   if (!Array.isArray(referenceIds) || referenceIds.length === 0 || referenceIds.some(key => !UX_REFERENCES[key])) throw new TypeError('Known references are required');
   if (typeof adaptation !== 'string' || adaptation.trim().length < 30) throw new TypeError('Document the product-specific adaptation');
   if (!Array.isArray(states) || REQUIRED_STATES.some(state => !states.includes(state))) throw new TypeError('All interaction states are required');
-  if (typeof proof !== 'string' || !proof.trim()) throw new TypeError('Rendered proof is required');
-  return Object.freeze({ id, journey: journey.trim(), referenceIds: Object.freeze([...referenceIds]), adaptation: adaptation.trim(), states: Object.freeze([...states]), proof: proof.trim() });
+  if (!proof || !/^[a-f0-9]{40}$/.test(proof.commit ?? '') || !/^https:\/\/github\.com\/[a-z0-9_.-]+\/[a-z0-9_.-]+\/actions\/runs\/[1-9]\d*$/i.test(proof.runUrl ?? '') || Number.isNaN(Date.parse(proof.verifiedAt ?? ''))) throw new TypeError('Rendered exact-commit proof is required');
+  return Object.freeze({ id, journey: journey.trim(), referenceIds: Object.freeze([...referenceIds]), adaptation: adaptation.trim(), states: Object.freeze([...states]), proof: Object.freeze({...proof}) });
 }
 
 export { REQUIRED_STATES };
