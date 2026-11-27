@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "blocks": [
     {
       "id": "auth",
@@ -51,11 +51,12 @@
     },
     {
       "id": "ux-design",
-      "technology": "Evidence-backed pattern library / Playwright",
+      "technology": "Evidence-backed pattern library / icon buttons / responsive UX",
       "status": "testing",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "productionVerified": false,
-      "path": "blocks/ux-design/patterns.mjs"
+      "path": "blocks/ux-design/icon-buttons.css",
+      "documentation": "docs/ux-icon-buttons.md"
     },
     {
       "id": "monitoring",
@@ -71,88 +72,87 @@
       "priority": "P0",
       "technology": "Incident lifecycle",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "recovery",
       "priority": "P0",
       "technology": "Controlled recovery and rollback",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "support",
       "priority": "P1",
       "technology": "Support tickets and approved replies",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "feedback",
       "priority": "P1",
       "technology": "Feedback triage",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "improvement",
       "priority": "P2",
       "technology": "Evidence-based improvement",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "security-ops",
       "priority": "P0",
       "technology": "Dependency and access monitoring",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "backup",
       "priority": "P0",
       "technology": "Backup and restore verification",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "cost-control",
       "priority": "P0",
       "technology": "Budget and quota guards",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "knowledge",
       "priority": "P2",
       "technology": "Operational knowledge base",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "notifications",
       "priority": "P1",
       "technology": "Consent-aware notifications",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
     },
     {
       "id": "ops-reporting",
       "priority": "P1",
       "technology": "Operational evidence reporting",
       "status": "planned",
-      "version": null,
-      "productionVerified": false
+      "version": null
+    },
+    {
+      "id": "distribution",
+      "priority": "P0",
+      "technology": "Versioned WAF/WOC distribution, compatibility, rollout and rollback",
+      "status": "testing",
+      "version": "0.1.0",
+      "productionVerified": false,
+      "path": "blocks/distribution/manifest.mjs",
+      "documentation": "docs/distribution.md"
     }
   ]
 }
