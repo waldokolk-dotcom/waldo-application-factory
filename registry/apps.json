@@ -4,7 +4,9 @@
       "id": "verbindo",
       "repository": "waldokolk-dotcom/open-data-coach",
       "migration": "in-progress",
-      "blocks": [],
+      "blocks": [
+        "auth"
+      ],
       "role": "primary-reference",
       "priority": [
         "auth",
