@@ -72,77 +72,88 @@
       "priority": "P0",
       "technology": "Incident lifecycle",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "recovery",
       "priority": "P0",
       "technology": "Controlled recovery and rollback",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "support",
       "priority": "P1",
       "technology": "Support tickets and approved replies",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "feedback",
       "priority": "P1",
       "technology": "Feedback triage",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "improvement",
       "priority": "P2",
       "technology": "Evidence-based improvement",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "security-ops",
       "priority": "P0",
       "technology": "Dependency and access monitoring",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "backup",
       "priority": "P0",
       "technology": "Backup and restore verification",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "cost-control",
       "priority": "P0",
       "technology": "Budget and quota guards",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "knowledge",
       "priority": "P2",
       "technology": "Operational knowledge base",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "notifications",
       "priority": "P1",
       "technology": "Consent-aware notifications",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "ops-reporting",
       "priority": "P1",
       "technology": "Operational evidence reporting",
       "status": "planned",
-      "version": null
+      "version": null,
+      "productionVerified": false
     },
     {
       "id": "distribution",

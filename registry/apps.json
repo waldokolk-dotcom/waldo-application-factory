@@ -25,14 +25,9 @@
     },
     {
       "id": "pootgenoten",
-      "repository": "Sites project appgprj_6b087e1feb74819185350e613b50aa67",
-      "migration": "registered-prototype",
-      "blocks": [
-        "theme",
-        "ux-design",
-        "distribution",
-        "monitoring"
-      ],
+      "repository": "waldokolk-dotcom/whatsup-dog",
+      "migration": "conversion-in-progress",
+      "blocks": [],
       "role": "practice-application",
       "priority": [
         "auth",
@@ -49,7 +44,11 @@
       ],
       "standard": "docs/ux-marketing-visual-standard.md",
       "activeVersion": null,
-      "rolloutPolicy": "staged"
+      "rolloutPolicy": "staged",
+      "sourceHistory": {
+        "previousSitesProject": "appgprj_6b087e1feb74819185350e613b50aa67",
+        "conversionBranch": "feat/pootgenoten-conversion-20261127"
+      }
     }
   ]
 }
