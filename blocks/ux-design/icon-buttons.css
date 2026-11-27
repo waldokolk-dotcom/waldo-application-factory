@@ -1,0 +1,16 @@
+/* WAF UX icon-button block v0.1.0. Use inline SVG or an approved icon component; never emoji as interface icons. */
+:root{--ux-icon-size:1.125rem;--ux-control-height:2.75rem;--ux-control-radius:.625rem;--ux-control-gap:.5rem;--ux-control-pad:.75rem}
+.ux-button{display:inline-flex;align-items:center;justify-content:center;gap:var(--ux-control-gap);min-height:var(--ux-control-height);padding:.625rem var(--ux-control-pad);border:1px solid var(--brand-border);border-radius:var(--ux-control-radius);background:var(--brand-surface);color:var(--brand-text);font:600 .9375rem/1.2 var(--brand-font);cursor:pointer;white-space:nowrap}
+.ux-button:hover{background:var(--brand-surface-subtle)}
+.ux-button:active{transform:translateY(1px)}
+.ux-button:focus-visible{outline:var(--focus-ring);outline-offset:3px}
+.ux-button--primary{background:var(--brand-primary);border-color:var(--brand-primary);color:var(--brand-primary-contrast)}
+.ux-button--danger{background:var(--brand-danger);border-color:var(--brand-danger);color:#fff}
+.ux-button__icon{width:var(--ux-icon-size);height:var(--ux-icon-size);flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ux-icon-button{width:var(--ux-control-height);height:var(--ux-control-height);padding:0;display:inline-grid;place-items:center;border:1px solid var(--brand-border);border-radius:50%;background:var(--brand-surface);color:var(--brand-text);cursor:pointer}
+.ux-icon-button:hover{background:var(--brand-surface-subtle)}
+.ux-icon-button:focus-visible{outline:var(--focus-ring);outline-offset:3px}
+.ux-icon-button[aria-disabled=true],.ux-button[aria-disabled=true]{opacity:.5;cursor:not-allowed}
+@media (min-width:48rem){.ux-button{min-height:2.625rem}.ux-icon-button{width:2.625rem;height:2.625rem}.ux-desktop-hide{display:none!important}}
+@media (max-width:47.999rem){.ux-desktop-only{display:none!important}.ux-button{min-height:3rem}.ux-icon-button{width:3rem;height:3rem}}
+@media (prefers-reduced-motion:reduce){.ux-button,.ux-icon-button{transition:none;transform:none}}
