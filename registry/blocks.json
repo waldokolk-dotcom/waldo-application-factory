@@ -67,16 +67,19 @@
     {
       "id": "quality",
       "technology": "Node test / Playwright / OWASP ASVS",
-      "status": "testing",
+      "status": "approved",
       "version": "0.2.0",
-      "productionVerified": false,
+      "productionVerified": true,
       "path": "blocks/quality/gate.mjs",
       "documentation": "blocks/quality/README.md",
-      "blockingEvidence": {
+      "evidence": {
         "referenceApp": "verbindo",
-        "liveCommit": "2fae80c79ed1ee0ccc718e441e0b79c0f632ab7c",
-        "verifiedAt": "2026-11-27T17:32:00+01:00",
-        "reason": "axe label-content-name-mismatch serious on two live links; consumer changes prohibited"
+        "releaseRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46030529070",
+        "browserRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46030529141",
+        "followupReleaseRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46031455833",
+        "followupBrowserRun": "https://github.com/waldokolk-dotcom/open-data-coach/actions/runs/46031455775",
+        "liveCommit": "3fc2676fa560d71e817dfc3e2072d0391cfa573f",
+        "verifiedAt": "2026-11-27T18:25:00+01:00"
       }
     },
     {
