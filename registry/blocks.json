@@ -233,7 +233,7 @@
       "priority": "P0",
       "technology": "Versioned WAF/WOC distribution, compatibility, rollout and rollback",
       "status": "testing",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "productionVerified": false,
       "path": "blocks/distribution/manifest.mjs",
       "documentation": "docs/distribution.md"
@@ -243,7 +243,7 @@
       "priority": "P0",
       "technology": "Preview, evidence, approval and rollback gate",
       "status": "testing",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "productionVerified": false,
       "path": "blocks/change-control/manifest.mjs",
       "documentation": "docs/change-control.md"

@@ -1,15 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { validateUpdate, canRollout, createReleaseNotice } from '../blocks/distribution/manifest.mjs';
-
-test('validates and creates an update notice', () => {
-  const update = validateUpdate({appId:'pootgenoten',blockId:'ux-design',fromVersion:'0.1.0',toVersion:'0.1.1',changeType:'minor',compatibility:['web'],rollbackVersion:'0.1.0'});
-  assert.equal(update.state,'available');
-  assert.equal(createReleaseNotice(update).toVersion,'0.1.1');
-});
-
-test('rollout requires compatibility and an accepted block', () => {
-  const update={blockId:'ux-design',compatibility:['web']};
-  assert.equal(canRollout(update,{platform:'web',acceptedBlocks:['ux-design']}),true);
-  assert.equal(canRollout(update,{platform:'mobile',acceptedBlocks:['ux-design']}),false);
-});
+const valid = {appId:'reference',blockId:'api',fromVersion:'0.1.0',toVersion:'0.2.0',changeType:'minor',compatibility:['web'],rollbackVersion:'0.1.0',targetCommit:'a'.repeat(40),evidenceRun:'https://github.com/waldokolk-dotcom/app/actions/runs/123',rolloutPercent:10};
+test('creates a commit-bound staged release notice',()=>{const update=validateUpdate(valid);assert.equal(update.state,'available');assert.equal(createReleaseNotice(update).targetCommit,'a'.repeat(40));});
+test('rollout requires matching app, platform and approved installed version',()=>{const app={appId:'reference',platform:'web',acceptedBlocks:[{id:'api',version:'0.1.0',status:'approved'}]};assert.equal(canRollout(valid,app),true);assert.equal(canRollout(valid,{...app,platform:'mobile'}),false);assert.equal(canRollout(valid,{...app,acceptedBlocks:[{id:'api',version:'0.0.9',status:'approved'}]}),false);});
+test('rejects placeholder evidence, unsafe rollback and invalid rollout bounds',()=>{for(const update of [{...valid,evidenceRun:'https://example.com/pass'},{...valid,targetCommit:'abc'},{...valid,rollbackVersion:'0.0.9'},{...valid,rolloutPercent:0},{...valid,compatibility:['desktop']}]) assert.throws(()=>validateUpdate(update));});
