@@ -1,6 +1,7 @@
 import {readFile} from 'node:fs/promises';
 import {createServer} from 'node:http';
 import {timingSafeEqual} from 'node:crypto';
+import {createAuthenticator,ownsResource} from '../blocks/auth/server.mjs';
 import {fileURLToPath} from 'node:url';
 const root=new URL('../',import.meta.url);
 const read=path=>readFile(new URL(path,root),'utf8');
@@ -10,13 +11,14 @@ export function authorized(header,password){
  const actual=Buffer.from(header);
  return expected.length===actual.length && timingSafeEqual(expected,actual);
 }
-export function createControlServer(password){
+export function createControlServer(password, {client,ownerId}={}){
  if(typeof password!=='string'||password.length<24) throw Error('WAF_OWNER_PASSWORD must be at least 24 characters');
+ const authenticate=client?createAuthenticator(client):null;
  return createServer(async(req,res)=>{
  res.setHeader('Cache-Control','no-store');
  res.setHeader('X-Content-Type-Options','nosniff');
  res.setHeader('Content-Security-Policy',"default-src 'none'; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'none'");
- if(!authorized(req.headers.authorization,password)){res.writeHead(401,{'WWW-Authenticate':'Basic realm="WAF", charset="UTF-8"'});return res.end('Access denied');}
+ if(!(authenticate ? ownsResource(await authenticate(req.headers.authorization),ownerId) : authorized(req.headers.authorization,password))){res.writeHead(401,{'WWW-Authenticate':'Basic realm="WAF", charset="UTF-8"'});return res.end('Access denied');}
  if(req.method!=='GET'){res.writeHead(405);return res.end();}
  try{
  const routes={'/':['control/index.html','text/html'],'/style.css':['control/style.css','text/css'],'/app.js':['control/app.js','text/javascript'],'/theme.css':['blocks/theme.css','text/css'],'/api/blocks':['registry/blocks.json','application/json'],'/api/apps':['registry/apps.json','application/json']};
