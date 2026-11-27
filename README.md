@@ -5,6 +5,7 @@ Centrale ontwikkelstandaard en versiegebonden bouwblokken; Verbindo is de primai
 - Lees AGENTS.md en docs/chat-workflow.md.
 - Raadpleeg registry/blocks.json en registry/apps.json.
 - Voer npm test uit met Node 22+. CI is geconfigureerd; controleer de resultaten op GitHub.
+- Consumers importeren uitsluitend de publieke package-exports van `@waldokolk/waf-core` en pinnen een exacte, goedgekeurde versie of commit. Importeer geen interne bestandspaden en volg nooit een bewegende branch in productie.
 - Begin met Verbindo op een afzonderlijke testbranch. Inventariseer auth, routes, datamodel en mail. Test registratie, verificatie, herstel, uitloggen en negatieve toegangstests voordat productie wordt gewijzigd.
 - Registreer pas goedgekeurde bouwblokversies na gedocumenteerde tests.
 
