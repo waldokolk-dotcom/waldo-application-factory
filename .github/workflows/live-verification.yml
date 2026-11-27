@@ -26,7 +26,7 @@ jobs:
           assert data.get('factoryVersion') == '0.3.0', 'Unexpected factory version'
           assert data.get('app') == 'verbindo', 'Unexpected app'
           assert data.get('appVersion') == '8.3.0', 'Unexpected deployed app version'
-          assert data.get('commit') == 'bce55e39d6b501e33486746f37fdb2503813711f', 'Unexpected deployed commit'
+          assert data.get('commit') == '184bf5ac521f1cffb12033f80e424322d4fc2c56', 'Unexpected deployed commit'
           assert data.get('releaseVerified') is True, 'Missing release metadata'
           blocks = data.get('blocks')
           assert isinstance(blocks, dict) and set(blocks) == {'auth','data','theme','api','quality','release','ux-design'}, 'Unexpected block set'
