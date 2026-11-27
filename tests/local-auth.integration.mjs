@@ -57,6 +57,59 @@ async function signIn(email, password) {
   assert.ok(r.json?.access_token && r.json?.refresh_token && r.json?.user?.id);
   return r.json;
 }
+async function data(method, token, body, query = '') {
+  const response = await fetch(API + '/rest/v1/waf_test_records' + query, {
+    method,
+    headers: {
+      apikey: key,
+      'content-type': 'application/json',
+      prefer: 'return=representation',
+      ...(token ? {authorization: 'Bearer ' + token} : {})
+    },
+    ...(body === undefined ? {} : {body:JSON.stringify(body)}),
+    signal: AbortSignal.timeout(15000)
+  });
+  const result = await response.text();
+  let json;
+  try {json=JSON.parse(result);} catch {json=null;}
+  return {status:response.status,json};
+}
+async function exerciseRls(userA,userB) {
+  const inserted=[];
+  try {
+    const insertA=await data('POST',userA.access_token,{owner_id:userA.user.id,value:'alpha'});
+    assert.equal(insertA.status,201,'Owner A insert must succeed');
+    assert.equal(insertA.json?.[0]?.owner_id,userA.user.id);
+    inserted.push([userA.access_token,insertA.json[0].id]);
+    const insertB=await data('POST',userB.access_token,{owner_id:userB.user.id,value:'beta'});
+    assert.equal(insertB.status,201,'Owner B insert must succeed');
+    assert.equal(insertB.json?.[0]?.owner_id,userB.user.id);
+    inserted.push([userB.access_token,insertB.json[0].id]);
+    const spoof=await data('POST',userA.access_token,{owner_id:userB.user.id,value:'spoofed'});
+    assert.ok([401,403].includes(spoof.status),'Owner spoofing must be rejected');
+    const readA=await data('GET',userA.access_token,undefined,'?select=id,owner_id,value');
+    const readB=await data('GET',userB.access_token,undefined,'?select=id,owner_id,value');
+    assert.equal(readA.status,200);
+    assert.equal(readB.status,200);
+    assert.deepEqual(readA.json.map(x=>x.value),['alpha'],'User A must not see user B');
+    assert.deepEqual(readB.json.map(x=>x.value),['beta'],'User B must not see user A');
+    const anonymous=await data('GET',null,undefined,'?select=id');
+    assert.ok([200,401,403].includes(anonymous.status));
+    if (anonymous.status===200) assert.deepEqual(anonymous.json,[],'Anon access must not expose rows');
+    const tamper=await data('PATCH',userA.access_token,{owner_id:userB.user.id},
+      '?id=eq.'+insertA.json[0].id);
+    assert.ok([401,403].includes(tamper.status),'Changing row owner must be forbidden');
+    const crossDelete=await data('DELETE',userA.access_token,undefined,
+      '?id=eq.'+insertB.json[0].id);
+    assert.ok([200,204].includes(crossDelete.status),'Cross-owner delete must be filtered');
+    const bAfter=await data('GET',userB.access_token,undefined,'?select=value');
+    assert.deepEqual(bAfter.json?.map(x=>x.value),['beta'],'Cross-owner delete must not remove data');
+  } finally {
+    for (const [jwt,id] of inserted) {
+      await data('DELETE',jwt,undefined,'?id=eq.'+id).catch(()=>{});
+    }
+  }
+}
 test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery and logout', {timeout: 95000}, async () => {
   const suffix = randomUUID().replaceAll('-', '').slice(0,20);
   const a = 'waf-a-' + suffix + '@example.invalid';
@@ -81,6 +134,7 @@ test('real local signup, Mailpit confirmation, sign-in, user isolation, recovery
   assert.ok([401,403].includes((await auth('user', 'GET', undefined, 'invalid')).status), 'Invalid token must be denied');
   assert.ok([401,403].includes((await auth('admin/users','GET',undefined,userA.access_token)).status),
     'Normal users must not access the admin API');
+  await exerciseRls(userA,userB);
   const recovery = await auth('recover','POST',{email:a});
   assert.ok([200,204].includes(recovery.status),'Recovery request failed');
   const recoveryMail = await mailFor(a,seen);
