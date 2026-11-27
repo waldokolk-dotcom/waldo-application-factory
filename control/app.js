@@ -1,0 +1,7 @@
+const el=id=>document.getElementById(id);
+const add=(parent,tag,value)=>{const node=document.createElement(tag);node.textContent=value;parent.append(node);return node;};
+const base='https://github.com/waldokolk-dotcom/waldo-application-factory/blob/main/';
+async function load(path){const r=await fetch(path);if(!r.ok)throw Error('Register niet beschikbaar');return r.json();}
+async function init(){try{const [registry,apps]=await Promise.all([load('/api/blocks'),load('/api/apps')]);el('status').textContent=registry.blocks.length+' bouwblokken · '+registry.blocks.filter(b=>b.productionVerified).length+' productiegeverifieerd · WAF '+registry.version;
+function render(){el('blocks').replaceChildren();const q=el('search').value.toLowerCase();for(const b of registry.blocks.filter(b=>(b.id+' '+b.technology).toLowerCase().includes(q))){const a=add(el('blocks'),'article','');add(a,'h3',b.id);add(a,'p',b.technology+' · '+b.version+' · '+b.status);add(a,'p',b.productionVerified?'Productie bewezen':'Productie nog niet bewezen');const link=add(a,'a','Bekijk broncode');link.href=base+b.path;}if(!el('blocks').children.length)add(el('blocks'),'p','Geen bouwblokken gevonden.');}
+el('search').addEventListener('input',render);render();for(const app of apps.apps){const a=add(el('apps'),'article','');add(a,'h3',app.id);add(a,'p',app.migration+' · '+app.blocks.join(', '));}}catch{el('status').textContent='Register laden mislukt. Vernieuw de pagina.';}}init();
